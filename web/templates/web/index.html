@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructora VANGUARDIA | Edificios y Casas</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --primary: #1a252f;
+            /* Azul oscuro industrial */
+            --accent: #e6b800;
+            /* Dorado construcción */
+            --text-light: #f4f4f4;
+            --text-dark: #333;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 37, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION CON CANVAS DINÁMICO --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: white;
+            overflow: hidden;
+        }
+
+        #canvas-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            /* Bordes cuadrados estilo industrial */
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- SOBRE NOSOTROS --- */
+        section {
+            padding: 100px 10%;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 4px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .about-image {
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            box-shadow: 20px 20px 0px var(--primary);
+            border-radius: 4px;
+        }
+
+        /* --- PROYECTOS --- */
+        #proyectos {
+            background: #fff;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Mantiene la proporción de las fotos */
+            transition: 0.5s;
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(26, 37, 47, 0.95), transparent);
+            color: white;
+            transition: 0.4s;
+
+            pointer-events: none;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card:hover .project-overlay {
+            bottom: 0;
+        }
+
+        .project-cat {
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+
+        /* --- CONTACTO --- */
+        #contacto {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input,
+        textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 1px solid var(--accent);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #111;
+            color: #777;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            /* En una versión real agregaríamos menú hamburguesa */
+            nav {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">VAN<span>GUARDIA</span></div>
+        <ul class="nav-links">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <canvas id="canvas-bg"></canvas>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="hero-title">Construyendo el Futuro, <br>Cimiento a Cimiento.</h1>
+            <p class="hero-subtitle">Especialistas en arquitectura moderna, rascacielos residenciales y hogares de lujo.
+            </p>
+            <a href="#proyectos" class="btn">Ver Proyectos</a>
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <div class="about-container">
+            <div class="about-text" data-aos="fade-right">
+                <h2 class="section-title">Ingeniería de Precisión</h2>
+                <p>En <strong>VANGUARDIA</strong>, no solo construimos edificios; creamos legados. Con más de 15 años de
+                    experiencia, fusionamos la ingeniería estructural más avanzada con un diseño estético impecable.</p>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>150+</h3>
+                        <p>Proyectos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15</h3>
+                        <p>Años Exp.</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Calidad</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image" data-aos="fade-left"></div>
+        </div>
+    </section>
+
+    <section id="proyectos">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 class="section-title">Nuestras Obras</h2>
+        </div>
+
+        <div id="project-container" class="project-grid">
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div data-aos="zoom-in">
+            <h2 class="section-title" style="color:white; border-color: var(--accent);">Inicia tu Proyecto</h2>
+            <p>Estamos listos para materializar tu visión.</p>
+
+            <form class="contact-form" id="form-contacto">
+                <input type="text" id="nombre" placeholder="Nombre Completo" required>
+                <input type="email" id="email" placeholder="Correo Electrónico" required>
+                <textarea id="mensaje" rows="5" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                <button type="submit" class="btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Constructora Vanguardia. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox-plus-jquery.min.js"></script>
+    <script src="/static/main.js"></script>
+
+    <a href="https://wa.me/595991836615?text=Hola%20Vanguardia,%20vi%20sus%20obras%20y%20quiero%20dar%20el%20primer%20paso%20con%20mi%20proyecto"
+        class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <style>
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background-color: #1fe068;
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</body>
+
+</html>
