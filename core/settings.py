@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,6 +122,24 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# --- CONFIGURACIÓN DE IMÁGENES (MEDIA) ---
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+JAZZMIN_SETTINGS = {
+    "site_title": "Vanguardia Admin",
+    "site_header": "Panel Vanguardia",
+    "site_brand": "Vanguardia",
+    "welcome_sign": "Bienvenido al Panel de Control",
+    "copyright": "Constructora Vanguardia",
+    "search_model": "web.Proyecto",
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "web.Proyecto": "fas fa-building",   # Icono de edificio
+        "web.Contacto": "fas fa-envelope",   # Icono de carta
+    },
+    
+    "show_ui_builder": True, 
+}
